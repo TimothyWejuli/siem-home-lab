@@ -10,7 +10,7 @@ Use in **Threat intelligence > Threat Hunting > Events**. Remove any `rule.level
 | Admin group changes (high severity) | `rule.id: 60154` |
 | Accounts deleted | `data.win.system.eventID: 4726` |
 | High and critical alerts only | `rule.level >= 12` |
-| Everything from one agent | `agent.name: "win-host-01"` |
+| Everything from one agent | `agent.name: "BBC"` |
 | Alerts tagged with a MITRE technique | `rule.mitre.id: "T1098"` |
 
 ## Windows Event ID reference

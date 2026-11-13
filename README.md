@@ -183,7 +183,12 @@ The installer deploys the indexer, manager, and dashboard, then prints the `admi
 
 ### Step 7: Enroll the Windows agent
 
-I deployed the agent with **Endpoints > Deploy new agent** and started the service:
+I deployed the agent with **Endpoints > Deploy new agent** and started the service from an administrator prompt:
+
+```powershell
+NET START WAZUH     # start the agent
+NET STOP WAZUH      # stop the agent
+```
 
 <img width="398" alt="Wazuh service started successfully" src="docs/images/11-agent-service-started.png" />
 
@@ -206,10 +211,10 @@ Test-NetConnection 192.168.0.44 -Port 1514
 **Fix:** set the manager address and enroll manually ([`Register-WazuhAgent.ps1`](scripts/Register-WazuhAgent.ps1) automates this):
 
 ```powershell
-Stop-Service WazuhSvc
+NET STOP WAZUH
 (Get-Content "C:\Program Files (x86)\ossec-agent\ossec.conf") -replace '<address>.*</address>', '<address>192.168.0.44</address>' | Set-Content "C:\Program Files (x86)\ossec-agent\ossec.conf"
 & "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m 192.168.0.44
-Start-Service WazuhSvc
+NET START WAZUH
 ```
 
 **Result: 1 active agent.**
@@ -320,7 +325,6 @@ data.win.system.eventID: (4625 or 4720 or 4732 or 4726)
 | Wazuh 4.14 all-in-one install | ✅ Done |
 | Windows agent enrolled | ✅ Done |
 | Detection Test 1 (account activity) | ✅ Done – PASS |
-| Rename agent to `win-host-01` | ⏳ In progress |
 | DHCP reservation for the SIEM, SSH key auth, password login disabled | 🔲 Planned |
 | Sysmon on Windows for process and command-line visibility | 🔲 Planned |
 | Brute-force correlation test (rapid failed logons) | 🔲 Planned |

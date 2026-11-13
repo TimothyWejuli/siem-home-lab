@@ -7,9 +7,9 @@
     Use -Reset to delete the existing key first (needed when renaming an agent; remove the
     old agent on the manager with: sudo /var/ossec/bin/manage_agents -r <ID>).
 .EXAMPLE
-    .\Register-WazuhAgent.ps1 -ManagerIP 192.168.0.44 -AgentName win-host-01
+    .\Register-WazuhAgent.ps1 -ManagerIP 192.168.0.44 -AgentName win-laptop-01
 .EXAMPLE
-    .\Register-WazuhAgent.ps1 -ManagerIP 192.168.0.44 -AgentName win-host-01 -Reset
+    .\Register-WazuhAgent.ps1 -ManagerIP 192.168.0.44 -AgentName win-laptop-01 -Reset
 #>
 #Requires -RunAsAdministrator
 param(
@@ -21,7 +21,7 @@ param(
 $agentDir = "C:\Program Files (x86)\ossec-agent"
 $conf     = "$agentDir\ossec.conf"
 
-Stop-Service WazuhSvc -ErrorAction SilentlyContinue
+NET STOP WAZUH
 
 if ($Reset -and (Test-Path "$agentDir\client.keys")) {
     Remove-Item "$agentDir\client.keys" -Force
@@ -36,6 +36,5 @@ Write-Host "ossec.conf now points to $ManagerIP"
 
 & "$agentDir\agent-auth.exe" -m $ManagerIP -A $AgentName
 
-Start-Service WazuhSvc
-Get-Service WazuhSvc | Format-Table Name, Status -AutoSize
+NET START WAZUH
 Write-Host "Check the dashboard (Endpoints) or run on the server: sudo /var/ossec/bin/agent_control -l"
