@@ -1,0 +1,8 @@
+# Never commit secrets or install artifacts
+wazuh-install-files.tar
+wazuh-passwords.txt
+*.keys
+client.keys
+*.log
+.DS_Store
+Thumbs.db

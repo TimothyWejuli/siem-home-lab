@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <rect width="920" height="520" fill="#ffffff"/>
+
+  <!-- LAN -->
+  <rect x="20" y="20" width="880" height="480" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-dasharray="6 4"/>
+  <text x="40" y="50" font-size="16" font-weight="700" fill="#0f172a">Home LAN · 192.168.0.0/24</text>
+
+  <!-- Host PC -->
+  <rect x="40" y="70" width="560" height="410" rx="12" fill="#eef2ff" stroke="#6366f1"/>
+  <text x="60" y="98" font-size="15" font-weight="700" fill="#1e1b4b">Windows host PC (ASUS · AMD-V / SVM enabled)</text>
+
+  <!-- VirtualBox / VM -->
+  <rect x="60" y="115" width="300" height="345" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="1.5"/>
+  <text x="78" y="142" font-size="14" font-weight="700" fill="#134e4a">VirtualBox VM: tu12wazumsiem</text>
+  <text x="78" y="162" font-size="12.5" fill="#334155">Ubuntu Server 24.04.3 LTS</text>
+  <text x="78" y="180" font-size="12.5" fill="#334155">4 vCPU · 8 GB · bridged · 192.168.0.44</text>
+
+  <rect x="76" y="198" width="268" height="230" rx="8" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="96" y="222" font-size="13.5" font-weight="700" fill="#065f46">Wazuh 4.14 (all-in-one)</text>
+
+  <rect x="92" y="236" width="236" height="50" rx="6" fill="#ffffff" stroke="#10b981"/>
+  <text x="104" y="256" font-size="13" font-weight="600" fill="#0f172a">Wazuh manager</text>
+  <text x="104" y="275" font-size="11.5" fill="#475569">Rules and alerts · 1514/1515 TCP</text>
+
+  <rect x="92" y="294" width="236" height="50" rx="6" fill="#ffffff" stroke="#10b981"/>
+  <text x="104" y="314" font-size="13" font-weight="600" fill="#0f172a">Wazuh indexer</text>
+  <text x="104" y="333" font-size="11.5" fill="#475569">Stores and searches alert data</text>
+
+  <rect x="92" y="352" width="236" height="58" rx="6" fill="#ffffff" stroke="#10b981"/>
+  <text x="104" y="372" font-size="13" font-weight="600" fill="#0f172a">Wazuh dashboard</text>
+  <text x="104" y="391" font-size="11.5" fill="#475569">Threat hunting, DQL · HTTPS 443</text>
+
+  <text x="78" y="448" font-size="11.5" fill="#475569">OpenSSH server · port 22</text>
+
+  <!-- Windows agent -->
+  <rect x="420" y="135" width="160" height="110" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="436" y="160" font-size="13.5" font-weight="700" fill="#1e3a8a">Wazuh agent</text>
+  <text x="436" y="180" font-size="12" fill="#334155">Windows host</text>
+  <text x="436" y="198" font-size="12" fill="#334155">Security event log</text>
+  <text x="436" y="216" font-size="12" fill="#334155">SCA · FIM · vuln scan</text>
+  <text x="436" y="234" font-size="12" fill="#334155">Sends to 1514/1515</text>
+
+  <!-- Admin tools -->
+  <rect x="420" y="290" width="160" height="150" rx="10" fill="#ffffff" stroke="#64748b"/>
+  <text x="436" y="315" font-size="13.5" font-weight="700" fill="#0f172a">Admin tools</text>
+  <text x="436" y="337" font-size="12" fill="#334155">PowerShell</text>
+  <text x="436" y="357" font-size="12" fill="#334155">Browser → port 443</text>
+  <text x="436" y="377" font-size="12" fill="#334155">SSH client → port 22</text>
+  <text x="436" y="397" font-size="12" fill="#334155">Test-NetConnection</text>
+
+  <!-- arrows -->
+  <line x1="420" y1="190" x2="332" y2="255" stroke="#334155" stroke-width="2"/>
+  <polygon points="326,259 334,247 340,257" fill="#334155"/>
+  <line x1="420" y1="357" x2="332" y2="380" stroke="#334155" stroke-width="2"/>
+  <polygon points="326,382 336,373 338,386" fill="#334155"/>
+  <line x1="420" y1="425" x2="282" y2="444" stroke="#334155" stroke-width="2"/>
+  <polygon points="274,445 285,438 286,450" fill="#334155"/>
+
+  <!-- Router + future -->
+  <rect x="630" y="70" width="250" height="110" rx="12" fill="#ffffff" stroke="#64748b"/>
+  <text x="648" y="98" font-size="14" font-weight="700" fill="#0f172a">Home router</text>
+  <text x="648" y="120" font-size="12" fill="#334155">DHCP · default gateway</text>
+  <text x="648" y="140" font-size="12" fill="#334155">Planned: syslog 514/UDP</text>
+  <text x="648" y="160" font-size="12" fill="#334155">and DHCP reservation for .44</text>
+
+  <rect x="630" y="200" width="250" height="140" rx="12" fill="#fff7ed" stroke="#f59e0b" stroke-dasharray="5 4"/>
+  <text x="648" y="228" font-size="14" font-weight="700" fill="#7c2d12">Planned expansion</text>
+  <text x="648" y="250" font-size="12" fill="#334155">Raspberry Pi + Pi-hole (DNS logs)</text>
+  <text x="648" y="270" font-size="12" fill="#334155">Linux agent</text>
+  <text x="648" y="290" font-size="12" fill="#334155">Sysmon on Windows</text>
+  <text x="648" y="310" font-size="12" fill="#334155">Email alerts for level 10+</text>
+
+  <rect x="630" y="360" width="250" height="120" rx="12" fill="#ffffff" stroke="#64748b"/>
+  <text x="648" y="388" font-size="14" font-weight="700" fill="#0f172a">Agentless devices</text>
+  <text x="648" y="410" font-size="12" fill="#334155">Phones, Roku, Xbox, smart TV</text>
+  <text x="648" y="430" font-size="12" fill="#334155">Visible later via router syslog</text>
+  <text x="648" y="450" font-size="12" fill="#334155">and Pi-hole DNS logs</text>
+</svg>
