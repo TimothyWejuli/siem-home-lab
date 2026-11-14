@@ -1,6 +1,6 @@
 # SIEM Home Lab: Endpoint Detection and Security Monitoring on a Home Network
 
-A self-hosted SIEM (built on open-source Wazuh 4.14) running on an Ubuntu Server VM, collecting security events from a Windows endpoint and detecting simulated attacker activity (local account creation, privilege escalation, failed logons, and account deletion), with every detection mapped to MITRE ATT&CK.
+A self-hosted SIEM (built on open-source Wazuh 4.14) running on an Ubuntu Server VM, collecting security events from a Windows endpoint and detecting simulated attacker activity (local account creation, privilege escalation, failed logons, and account deletion), with each alert tagged by Wazuh with its MITRE ATT&CK technique.
 
 ---
 
@@ -21,10 +21,10 @@ Each challenge from the business problem maps to a specific part of this build, 
 | Business challenge | Solution in this lab | Proof |
 |---|---|---|
 | **Logs are scattered across machines and nobody reviews them** | Wazuh agent on the Windows endpoint forwards Security event logs to a central Wazuh manager | Agents summary shows **1 active, 0 disconnected** ([15](docs/images/15-overview-one-active-agent.png)) |
-| **Detect attacker behavior quickly, not weeks later** | Built-in Wazuh rules for Windows account management and logon events | All four simulated attacker actions alerted **within seconds** ([18](docs/images/18-detection-test-results.png)) |
+| **Detect attacker behavior quickly, not weeks later** | Built-in Wazuh rules for Windows account management and logon events | All four simulated attacker actions generated alerts ([18](docs/images/18-detection-test-results.png)) |
 | **Separate what matters from noise** | Severity levels: the Administrators group change is rated **level 12 (High)**, while a single failed logon is level 5 | Detection results table ([18](docs/images/18-detection-test-results.png)) |
 | **Know your security posture, not just incidents** | Security Configuration Assessment (CIS benchmark) and vulnerability detection run automatically on enrollment | **473 medium / 316 low** baseline findings in the first 24 hours ([16](docs/images/16-alerts-by-severity-24h.png), [17](docs/images/17-medium-alerts-baseline-spike.png)) |
-| **Speak a common language for threats** | Each detection mapped to MITRE ATT&CK (T1136.001, T1098, T1110, T1531) | [Detection Test 1](#step-8-detection-test-1--simulated-attacker-account-activity) |
+| **Speak a common language for threats** | Wazuh's built-in rules tag each alert with a MITRE ATT&CK technique (T1136.001, T1098, T1110, T1531), which I reviewed for each detection | [Detection Test 1](#step-8-detection-test-1--simulated-attacker-account-activity) |
 | **Monitoring without commercial licensing** | Open-source Wazuh on a free Ubuntu Server VM | Full stack built on a single home PC |
 
 ### Outcome
@@ -69,7 +69,7 @@ Starting from an empty VirtualBox install, the lab delivers a working SIEM with 
 | **Configuration assessment** | CIS benchmark checks run against the endpoint automatically |
 | **Vulnerability detection** | Installed software checked against known CVEs |
 | **Threat hunting** | DQL queries in the dashboard to filter by event ID, rule, agent, and severity ([saved queries](detections/queries.md)) |
-| **Repeatable testing** | PowerShell script reproduces the detection test on demand ([script](scripts/Invoke-AccountDetectionTest.ps1)) |
+| **Repeatable testing** | PowerShell script to reproduce the detection test (not yet tested) ([script](scripts/Invoke-AccountDetectionTest.ps1)) |
 | **Health checks** | Bash and PowerShell scripts to check server services, ports, agent status, and connectivity |
 
 ---
@@ -257,7 +257,7 @@ data.win.system.eventID: (4625 or 4720 or 4732 or 4726)
 | 01:56:58 | 60122 | 5 | Logon Failure – Unknown user or bad password | 4625 | T1110 – Brute Force |
 | 01:57:12 | 60111 | 8 | User account disabled or deleted | 4726 | T1531 – Account Access Removal |
 
-**Result: PASS.** All four actions detected within seconds.
+**Result: PASS.** All four actions were detected.
 
 **Analysis**
 - **The admin group change was the only high-severity alert.** A new account gaining admin rights is a classic privilege-escalation and persistence sign, and the severity should reflect that.
@@ -294,12 +294,12 @@ data.win.system.eventID: (4625 or 4720 or 4732 or 4726)
 
 | Area | Skills |
 |---|---|
-| **Security operations** | SIEM deployment, agent enrollment, alert triage, severity analysis, MITRE ATT&CK mapping, DQL threat hunting, detection testing, baseline-vs-incident analysis |
+| **Security operations** | SIEM deployment, agent enrollment, alert triage, severity analysis, reading MITRE ATT&CK technique tags, DQL threat hunting, detection testing, baseline-vs-incident analysis |
 | **Windows security** | Security Event IDs (4625, 4720, 4732, 4726), audit policy (`auditpol`), local account and group management, PowerShell service control, agent config (`ossec.conf`) |
 | **Linux administration** | Ubuntu Server install and patching, `systemctl`, `ip`, `ss`, `ufw`, OpenSSH server, reading install logs |
 | **Networking** | NAT vs. Bridged, DHCP, TCP port testing, refused vs. timeout diagnosis, service port mapping (22/443/1514/1515) |
 | **Virtualization** | VM sizing against vendor requirements, ISO selection, UEFI virtualization (AMD-V/SVM), CPU contention diagnosis |
-| **Automation** | PowerShell and Bash scripts for enrollment, connectivity testing, health checks, and repeatable detection tests |
+| **Automation (in progress)** | PowerShell and Bash helper scripts for enrollment, connectivity testing, health checks, and detection tests. These are written but not yet tested in the lab |
 | **Documentation** | Root-cause analysis, step-by-step runbook with screenshots, findings table, SOC triage plan |
 
 ---
