@@ -1,6 +1,6 @@
-# Wazuh SIEM Home Lab: Endpoint Detection and Security Monitoring on a Home Network
+# SIEM Home Lab: Endpoint Detection and Security Monitoring on a Home Network
 
-A self-hosted Wazuh 4.14 SIEM running on an Ubuntu Server VM, collecting security events from a Windows endpoint and detecting simulated attacker activity (local account creation, privilege escalation, failed logons, and account deletion), with every detection mapped to MITRE ATT&CK.
+A self-hosted SIEM (built on open-source Wazuh 4.14) running on an Ubuntu Server VM, collecting security events from a Windows endpoint and detecting simulated attacker activity (local account creation, privilege escalation, failed logons, and account deletion), with every detection mapped to MITRE ATT&CK.
 
 ---
 
